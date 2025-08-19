@@ -1,4 +1,4 @@
-# 📊 KYC Dashboard
+# KYC Dashboard
 
 A responsive KYC Dashboard built with **Next.js**, **React**, **Tailwind CSS**, and **Chart.js**.
 
@@ -25,21 +25,50 @@ git clone https://github.com/aviraj1729/kyc-dashboard/
 cd kyc-dashboard
 
 ```
+
 2. **Install dependencies**
 
 ```bash
 npm install --legacy-peer-deps
 
 ```
+
 3. **Run the development server**
 
 ```bash
 npm run dev
 
 ```
+
 4. **Open in browser**
 
 ```bash
 http://localhost:3000
 
 ```
+
+# Screenshots of the project
+
+### Dashboard
+
+![Dashboard Screenshot](./assets/Dashboard.png)
+
+### Applications
+
+![Applications Screenshot](./assets/Applications.png)
+
+### Billing
+
+![Billing Screenshot](./assets/Billing.png)
+
+### Rate Card
+
+![Rate Card Screenshot](./assets/RateCard.png)
+
+### Agreement Copy
+
+![Agreement Copy Screenshot](./assets/Agreement.png)
+
+### Notices
+
+![Notices Screenshot](./assets/Notices.png)
