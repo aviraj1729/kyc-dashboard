@@ -67,7 +67,7 @@ http://localhost:3000
 
 ### Agreement Copy
 
-![Agreement Copy Screenshot](./assetsAgreementCopy.png)
+![Agreement Copy Screenshot](./assets/AgreementCopy.png)
 
 ### Notices
 
