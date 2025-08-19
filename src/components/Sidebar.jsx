@@ -32,11 +32,11 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-fit">
+    <div className="h-full">
       {/* Mobile menu button */}
       <button
         type="button"
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700"
+        className="lg:hidden fixed top-2 left-2 z-50 p-2 rounded-md bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700"
         onClick={toggleMobileMenu}
       >
         {isMobileMenuOpen ? (
@@ -49,7 +49,7 @@ export default function Sidebar() {
       {/* Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-20 bg-black bg-opacity-50"
+          className="lg:hidden h-full fixed inset-0 z-20 bg-black bg-opacity-50"
           onClick={toggleMobileMenu}
         />
       )}
@@ -57,7 +57,7 @@ export default function Sidebar() {
       {/* Sidebar */}
       <div
         className={`
-        fixed lg:static inset-y-0 left-0 z-30 w-64 bg-white dark:bg-gray-900 
+        fixed h-full lg:static inset-y-0 left-0 z-30 w-64 bg-white dark:bg-gray-900 
         shadow-lg border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out
         ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0
       `}
@@ -116,4 +116,3 @@ export default function Sidebar() {
     </div>
   );
 }
-

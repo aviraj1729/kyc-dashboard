@@ -144,31 +144,6 @@ export default function Notices() {
   const [filterPriority, setFilterPriority] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
-
   const filteredNotices = mockNotices.filter((notice) => {
     const matchesType = filterType === "all" || notice.type === filterType;
     const matchesPriority =
@@ -190,17 +165,9 @@ export default function Notices() {
   const stats = getNoticeStats();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300">
       <div className="flex">
-        <Sidebar />
-
         <div className="flex-1">
-          <Navbar
-            onThemeToggle={toggleTheme}
-            isDarkMode={isDarkMode}
-            page={"notices"}
-          />
-
           <main className="p-6">
             <div className="mb-8">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -372,16 +339,23 @@ export default function Notices() {
                           {notice.message}
                         </p>
 
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center space-x-4 text-xs md:text-base text-gray-500 dark:text-gray-400">
                           <div className="flex items-center space-x-1">
                             <CalendarIcon className="h-4 w-4" />
-                            <span>
-                              {new Date(notice.date).toLocaleDateString()}
-                            </span>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              {notice?.date && !isNaN(new Date(notice.date))
+                                ? new Date(notice.date).toLocaleDateString(
+                                    "en-US",
+                                    {
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    },
+                                  )
+                                : "N/A"}
+                            </p>
                           </div>
-                          <span>•</span>
                           <span className="capitalize">{notice.category}</span>
-                          <span>•</span>
                           <span>ID: {notice.id}</span>
                         </div>
                       </div>
@@ -408,4 +382,3 @@ export default function Notices() {
     </div>
   );
 }
-

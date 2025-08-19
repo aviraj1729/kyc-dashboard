@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
 import {
   DocumentTextIcon,
   ArrowDownTrayIcon,
@@ -100,33 +98,33 @@ The parties agree to submit to the exclusive jurisdiction of the courts in [Juri
 ];
 
 export default function Agreement() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("terms");
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem("theme");
+  //   const prefersDark = window.matchMedia(
+  //     "(prefers-color-scheme: dark)",
+  //   ).matches;
+  //
+  //   if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+  //     setIsDarkMode(true);
+  //     document.documentElement.classList.add("dark");
+  //   }
+  // }, []);
+  //
+  // const toggleTheme = () => {
+  //   const newMode = !isDarkMode;
+  //   setIsDarkMode(newMode);
+  //
+  //   if (newMode) {
+  //     document.documentElement.classList.add("dark");
+  //     localStorage.setItem("theme", "dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //     localStorage.setItem("theme", "light");
+  //   }
+  // };
 
   const handleDownload = () => {
     // In a real application, this would generate and download a PDF
@@ -152,107 +150,94 @@ export default function Agreement() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="flex">
-        <Sidebar />
+    <div className="p-6">
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            Service Agreement
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            PPY Technologies Terms of Service and Agreement
+          </p>
+        </div>
 
-        <div className="flex-1">
-          <Navbar
-            onThemeToggle={toggleTheme}
-            isDarkMode={isDarkMode}
-            page={"agreement"}
-          />
+        <div className="flex items-center space-x-3 mt-4 sm:mt-0">
+          <button
+            onClick={handleDownload}
+            className="flex items-center space-x-2 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+          >
+            <ArrowDownTrayIcon className="h-4 w-4" />
+            <span className="lg:text-base text-xs">Download PDF</span>
+          </button>
 
-          <main className="p-6">
-            <div className="mb-8">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    Service Agreement
-                  </h1>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    PPY Technologies Terms of Service and Agreement
-                  </p>
-                </div>
+          <button
+            onClick={handlePrint}
+            className="flex items-center space-x-2 p-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+          >
+            <PrinterIcon className="h-4 w-4" />
+            <span className="lg:text-base text-xs">Print</span>
+          </button>
 
-                <div className="flex items-center space-x-3 mt-4 sm:mt-0">
-                  <button
-                    onClick={handleDownload}
-                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                  >
-                    <ArrowDownTrayIcon className="h-4 w-4" />
-                    <span>Download PDF</span>
-                  </button>
+          <button
+            onClick={handleShare}
+            className="flex items-center space-x-2 p-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+          >
+            <ShareIcon className="h-4 w-4" />
+            <span className="lg:text-base text-xs">Share</span>
+          </button>
+        </div>
+      </div>
 
-                  <button
-                    onClick={handlePrint}
-                    className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-                  >
-                    <PrinterIcon className="h-4 w-4" />
-                    <span>Print</span>
-                  </button>
+      {/* Agreement Header */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+        <div className="flex items-center space-x-4 mb-4">
+          <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+            <DocumentTextIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              KYC Service Agreement
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Version 2.1 • Effective Date: January 1, 2024
+            </p>
+          </div>
+        </div>
 
-                  <button
-                    onClick={handleShare}
-                    className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-                  >
-                    <ShareIcon className="h-4 w-4" />
-                    <span>Share</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex items-center space-x-2">
+            <CalendarIcon className="h-4 w-4 text-gray-400" />
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Last Updated: January 1, 2024
+            </span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <DocumentTextIcon className="h-4 w-4 text-gray-400" />
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              7 Sections
+            </span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+              Current Version
+            </span>
+          </div>
+        </div>
+      </div>
 
-            {/* Agreement Header */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                  <DocumentTextIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                    KYC Service Agreement
-                  </h2>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Version 2.1 • Effective Date: January 1, 2024
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    Last Updated: January 1, 2024
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <DocumentTextIcon className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    7 Sections
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
-                    Current Version
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Table of Contents */}
-              <div className="lg:col-span-1">
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 sticky top-24">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    Table of Contents
-                  </h3>
-                  <nav className="space-y-2">
-                    {agreementSections.map((section) => (
-                      <button
-                        key={section.id}
-                        onClick={() => setActiveSection(section.id)}
-                        className={`
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Table of Contents */}
+        <div className="lg:col-span-1">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 top-24">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              Table of Contents
+            </h3>
+            <nav className="space-y-2">
+              {agreementSections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className={`
                           w-full text-left px-3 py-2 text-sm rounded-lg transition-all duration-200
                           ${
                             activeSection === section.id
@@ -260,74 +245,67 @@ export default function Agreement() {
                               : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                           }
                         `}
-                      >
-                        {section.title}
-                      </button>
-                    ))}
-                  </nav>
-                </div>
-              </div>
+                >
+                  {section.title}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
 
-              {/* Agreement Content */}
-              <div className="lg:col-span-3">
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-                  {agreementSections.map((section) => (
-                    <div
-                      key={section.id}
-                      className={`
+        {/* Agreement Content */}
+        <div className="lg:col-span-3">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+            {agreementSections.map((section) => (
+              <div
+                key={section.id}
+                className={`
                         p-6 border-b border-gray-200 dark:border-gray-700 last:border-b-0
                         ${activeSection === section.id ? "block" : "hidden"}
                       `}
+              >
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                  {section.title}
+                </h2>
+                <div className="prose dark:prose-invert max-w-none">
+                  {section.content.split("\n\n").map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed"
                     >
-                      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                        {section.title}
-                      </h2>
-                      <div className="prose dark:prose-invert max-w-none">
-                        {section.content
-                          .split("\n\n")
-                          .map((paragraph, index) => (
-                            <p
-                              key={index}
-                              className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed"
-                            >
-                              {paragraph}
-                            </p>
-                          ))}
-                      </div>
-                    </div>
+                      {paragraph}
+                    </p>
                   ))}
                 </div>
+              </div>
+            ))}
+          </div>
 
-                {/* Agreement Footer */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 mt-6">
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                      Agreement Acceptance
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
-                      By using PPY Technologies services, you acknowledge that
-                      you have read, understood, and agree to be bound by this
-                      Agreement.
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        For questions about this agreement, contact:
-                      </span>
-                      <a
-                        href="mailto:legal@ppytechnologies.com"
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-                      >
-                        legal@ppytechnologies.com
-                      </a>
-                    </div>
-                  </div>
-                </div>
+          {/* Agreement Footer */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 mt-6">
+            <div className="text-center">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                Agreement Acceptance
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                By using PPY Technologies services, you acknowledge that you
+                have read, understood, and agree to be bound by this Agreement.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  For questions about this agreement, contact:
+                </span>
+                <a
+                  href="mailto:legal@ppytechnologies.com"
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                >
+                  legal@ppytechnologies.com
+                </a>
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

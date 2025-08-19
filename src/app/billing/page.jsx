@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar";
 import {
   CreditCardIcon,
   BanknotesIcon,
@@ -105,46 +103,38 @@ const statusColors = {
 };
 
 export default function Billing() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem("theme");
+  //   const prefersDark = window.matchMedia(
+  //     "(prefers-color-scheme: dark)",
+  //   ).matches;
+  //
+  //   if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+  //     setIsDarkMode(true);
+  //     document.documentElement.classList.add("dark");
+  //   }
+  // }, []);
+  //
+  // const toggleTheme = () => {
+  //   const newMode = !isDarkMode;
+  //   setIsDarkMode(newMode);
+  //
+  //   if (newMode) {
+  //     document.documentElement.classList.add("dark");
+  //     localStorage.setItem("theme", "dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //     localStorage.setItem("theme", "light");
+  //   }
+  // };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300">
       <div className="flex">
-        <Sidebar />
-
         <div className="flex-1">
-          <Navbar
-            onThemeToggle={toggleTheme}
-            isDarkMode={isDarkMode}
-            page={"billing"}
-          />
-
           <main className="p-6">
             <div className="mb-8">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -218,9 +208,11 @@ export default function Billing() {
                       ${mockBillingData.lastPayment.amount.toLocaleString()}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {new Date(
-                        mockBillingData.lastPayment.date,
-                      ).toLocaleDateString()}
+                      {mockBillingData.lastPayment?.date
+                        ? new Date(
+                            mockBillingData.lastPayment.date,
+                          ).toLocaleDateString()
+                        : "N/A"}
                     </p>
                   </div>
                 </div>
@@ -433,4 +425,3 @@ export default function Billing() {
     </div>
   );
 }
-
